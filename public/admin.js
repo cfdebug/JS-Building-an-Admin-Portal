@@ -1,5 +1,4 @@
-// Your Code Here
-
+// Get Saved Book Inventory
 async function mainAdmin() {
 
     let response = await fetch('http://127.0.0.1:3001/listBooks')
@@ -11,10 +10,12 @@ async function mainAdmin() {
     })
 }
 
+// Create List Elements
 let uList = document.createElement("ul")
 let mainDiv = document.getElementById('root');
 mainDiv.appendChild(uList);
 
+// Add Books to List with an Input, Title, and Buttons
 function createList(book){
     let element = document.createElement("li");
     let input = document.createElement('input');
@@ -46,7 +47,7 @@ function createList(book){
     element.appendChild(deleteBtn);
 }
 
-
+// Add New Book Form
 function addForm(){
     let header = document.createElement('h1');
     let title = document.createElement('input');
@@ -87,7 +88,6 @@ function addForm(){
     addBook.addEventListener("click",function(){
         let options = { method: 'POST', headers: {'Content-Type':'application/json'},body: JSON.stringify({'title': title.value, 'year': new Date().getFullYear(), 'description': desc.value, 'quantity': 1, 'imageURL': `assets/${img.value}`})}
         fetch('http://127.0.0.1:3001/addBook',options);
-        main();
     });
 
     document.body.append(header);
