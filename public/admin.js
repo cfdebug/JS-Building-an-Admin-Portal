@@ -1,7 +1,7 @@
 // Get Saved Book Inventory
 async function mainAdmin() {
 
-    let response = await fetch('http://127.0.0.1:3001/listBooks')
+    let response = await fetch('https://safe-coast-45128.herokuapp.com/books')
     let books = await response.json()
 
     books.forEach(function(book){
@@ -30,15 +30,15 @@ function createList(book){
     saveBtn.textContent = "Save";
     saveBtn.id = 'basic-addon2';
     saveBtn.addEventListener("click",function(){
-        let options = { method: 'PATCH', headers: {'Content-Type':'application/json'},body: JSON.stringify({'id':book.id, 'quantity':input.value})}
-        fetch('http://127.0.0.1:3001/updateBook',options);
+        let options = { method: 'PUT', headers: {'Content-Type':'application/json'},body: JSON.stringify({'id':book.id, 'quantity':input.value})}
+        fetch(`https://safe-coast-45128.herokuapp.com/books/${book.id}`,options);
     });
     deleteBtn.textContent = "Delete";
     deleteBtn.id = 'basic-addon2';
     deleteBtn.style.background = 'red';
     deleteBtn.addEventListener("click",function(){
         let options = { method: 'DELETE', headers: {'Content-Type':'application/json'},body: JSON.stringify({'id':book.id})}
-        fetch(`http://127.0.0.1:3001/removeBook/${book.id}`,options);
+        fetch(`https://safe-coast-45128.herokuapp.com/books/${book.id}`,options);
     });
 
     uList.appendChild(element);
@@ -87,7 +87,7 @@ function addForm(){
     addBook.id = 'basic-addon2';
     addBook.addEventListener("click",function(){
         let options = { method: 'POST', headers: {'Content-Type':'application/json'},body: JSON.stringify({'title': title.value, 'year': new Date().getFullYear(), 'description': desc.value, 'quantity': 1, 'imageURL': `assets/${img.value}`})}
-        fetch('http://127.0.0.1:3001/addBook',options);
+        fetch('https://safe-coast-45128.herokuapp.com/books',options);
     });
 
     document.body.append(header);

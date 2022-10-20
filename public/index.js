@@ -1,9 +1,12 @@
 async function main() {
 
-    let response = await fetch('http://localhost:3001/listBooks')
+    let response = await fetch('https://safe-coast-45128.herokuapp.com/books')
     let books = await response.json()
+    console.log(books.foundBooks)
 
-    books.forEach(renderBook)
+    books.foundBooks.forEach(book => {
+       renderBook(book)
+    })
 }
 
 function renderBook(book) {
@@ -12,7 +15,7 @@ function renderBook(book) {
         <div class="col-sm-3">
             <div class="card" style="width: 100%;">
                 ${book.imageURL ? `
-                    <img class="card-img-top" src="${book.imageURL}" />
+                    <img class="card-img-top" src="${book.imageURL}"/>
                 `
                 : ``}
                 <div class="card-body">
